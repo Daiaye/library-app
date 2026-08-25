@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library App</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1>My Book Library</h1>
+        </div>
+        <div class="row">
+            <form id="book-form">
+                <label for="book">Book</label>
+                <br>
+                <input type="text" id="book" name="book">
+                <br>
+
+                <label for="author">Author</label>
+                <br>
+                <input type="text" id="author" name="author">
+                <br>
+
+                <label for="status">Status</label>
+                <br>
+                <select id="option" name="option">
+                    <option value="read">Read</option>
+                    <option value="not_read">Not Read</option>
+                </select>
+                <br>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
