@@ -33,6 +33,19 @@ function removeBookFromLibrary(id) {
     myLibrary = myLibrary.filter(book => book.id !== id)
 }
 
+function updateBookStatus(id) {
+    for (const book of myLibrary) {
+        if (book.id === id) {
+            if (book.status === "not read") {
+                book.status = "read"
+            } else {
+                book.status = "not read"
+            }
+            return
+        }
+    }
+}
+
 function renderTable() {
     const existingTable = document.querySelector(".table-container");
     if (existingTable) {
@@ -67,19 +80,31 @@ function renderTable() {
     
     // Row for each book
     for (const book of myLibrary) {
+        // Title
         const tr = document.createElement("tr");
         const td_title = document.createElement("td");
         td_title.textContent = book.title;
+        
+        // Author
         const td_author = document.createElement("td");
         td_author.textContent = book.author;
+        
+        // Status
         const td_status = document.createElement("td");
-        td_status.textContent = book.status;
+        const status_button = document.createElement("button");
+        status_button.textContent = book.status;
+        status_button.classList.add("status-button");
+        status_button.id = book.id
+        td_status.append(status_button);
+        
+        // Delete
         const td_delete = document.createElement("td");
         const del_button = document.createElement("button");
         del_button.textContent = "Delete";
         del_button.id = book.id;
         del_button.classList.add("delete-button")
         td_delete.append(del_button);
+        
         tr.append(td_title);
         tr.append(td_author);
         tr.append(td_status);
@@ -89,6 +114,10 @@ function renderTable() {
 
     tableContainer.append(table);
     container.append(tableContainer);
+
+    // For buttons
+    attachDeleteHandlers();     
+    attachStatusHandlers();   
 }
 
 function attachDeleteHandlers() {
@@ -97,9 +126,18 @@ function attachDeleteHandlers() {
         deleteButton.addEventListener("click", () => {
             removeBookFromLibrary(deleteButton.id);
             renderTable();
-            attachDeleteHandlers();
         });
     });
+}
+
+function attachStatusHandlers() {
+    const statusButtons = document.querySelectorAll(".status-button");
+    statusButtons.forEach((statusButton) => {
+        statusButton.addEventListener("click", () => {
+            updateBookStatus(statusButton.id)
+            renderTable();
+        })
+    })
 }
 
 const form = document.getElementById("book-form");
@@ -116,9 +154,7 @@ form.addEventListener("submit", function(event) {
 
     addBookToLibrary(bookTitle, bookAuthor, bookStatus);
     renderTable();
-    attachDeleteHandlers()
     form.reset();
 });
 
 renderTable();
-attachDeleteHandlers()
