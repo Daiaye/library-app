@@ -1,4 +1,4 @@
-const myLibrary = [
+let myLibrary = [
     {
         id: crypto.randomUUID(),
         title: "Confessions",
@@ -21,9 +21,6 @@ function Book(id, title, author, status) {
     this.title = title;
     this.author = author;
     this.status = status;
-    this.info = function() {
-        console.log(`${this.title} by ${this.author}, ${this.status}`);
-    };
 }
 
 function addBookToLibrary(title, author, status) {
@@ -32,52 +29,47 @@ function addBookToLibrary(title, author, status) {
     myLibrary.push(book);
 }
 
-// function removeBookFromLibrary(id) {
-//     const updatedLibrary = myLibrary.filter(book => "Confessions" !== book.title)
-//     return updatedLibrary
-// }
+function removeBookFromLibrary(id) {
+    myLibrary = myLibrary.filter(book => book.id !== id)
+}
 
-
-function displayLibrary () {
-    for (const book of myLibrary) {
-        console.log(book);
-        console.log("hi");
-    }
-
-    const container = document.querySelector(".container");
-
+function renderTable() {
     const existingTable = document.querySelector(".table-container");
     if (existingTable) {
         existingTable.remove();
     }
 
+    const container = document.querySelector(".container");
+    
     const tableContainer = document.createElement("div");
     tableContainer.classList.add("table-container");
 
     const table = document.createElement("table");
     const thead = document.createElement("thead");
+    const tbody = document.createElement("tbody");
+    table.append(thead);
+    table.append(tbody);
+
+    // Header row
     const tr = document.createElement("tr");
-    const td_name = document.createElement("td");
-    td_name.textContent = "Name";
+    const td_title = document.createElement("td");
+    td_title.textContent = "Title";
     const td_author = document.createElement("td");
     td_author.textContent = "Author";
     const td_status = document.createElement("td");
     td_status.textContent = "Status";
     const td_delete = document.createElement("td");
-    tr.append(td_name);
+    tr.append(td_title);
     tr.append(td_author);
     tr.append(td_status);
     tr.append(td_delete);
     thead.append(tr);
-    table.append(thead);
-
-    const tbody = document.createElement("tbody");
-    table.append(tbody);
-
+    
+    // Row for each book
     for (const book of myLibrary) {
         const tr = document.createElement("tr");
-        const td_name = document.createElement("td");
-        td_name.textContent = book.title;
+        const td_title = document.createElement("td");
+        td_title.textContent = book.title;
         const td_author = document.createElement("td");
         td_author.textContent = book.author;
         const td_status = document.createElement("td");
@@ -85,8 +77,14 @@ function displayLibrary () {
         const td_delete = document.createElement("td");
         const del_button = document.createElement("button");
         del_button.textContent = "Delete";
+        del_button.id = book.id;
+        del_button.classList.add("delete-button")
+        del_button.addEventListener("click", function() {
+            removeBookFromLibrary(book.id)
+            renderTable()
+        })
         td_delete.append(del_button);
-        tr.append(td_name);
+        tr.append(td_title);
         tr.append(td_author);
         tr.append(td_status);
         tr.append(td_delete);
@@ -109,16 +107,9 @@ form.addEventListener("submit", function(event) {
         return;
     }
 
-    console.log(bookTitle);
-    console.log(bookAuthor);
-    console.log(bookStatus);
-
-    console.log("adding a new book");
     addBookToLibrary(bookTitle, bookAuthor, bookStatus);
-
-    displayLibrary();
-
+    renderTable();
     form.reset();
 });
 
-displayLibrary();
+renderTable();
