@@ -79,10 +79,6 @@ function renderTable() {
         del_button.textContent = "Delete";
         del_button.id = book.id;
         del_button.classList.add("delete-button")
-        del_button.addEventListener("click", function() {
-            removeBookFromLibrary(book.id)
-            renderTable()
-        })
         td_delete.append(del_button);
         tr.append(td_title);
         tr.append(td_author);
@@ -93,6 +89,17 @@ function renderTable() {
 
     tableContainer.append(table);
     container.append(tableContainer);
+}
+
+function attachDeleteHandlers() {
+    const deleteButtons = document.querySelectorAll(".delete-button");
+    deleteButtons.forEach((deleteButton) => {
+        deleteButton.addEventListener("click", () => {
+            removeBookFromLibrary(deleteButton.id);
+            renderTable();
+            attachDeleteHandlers();
+        });
+    });
 }
 
 const form = document.getElementById("book-form");
@@ -109,7 +116,9 @@ form.addEventListener("submit", function(event) {
 
     addBookToLibrary(bookTitle, bookAuthor, bookStatus);
     renderTable();
+    attachDeleteHandlers()
     form.reset();
 });
 
 renderTable();
+attachDeleteHandlers()
