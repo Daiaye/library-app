@@ -72,6 +72,7 @@ function renderTable() {
     const td_status = document.createElement("td");
     td_status.textContent = "Status";
     const td_delete = document.createElement("td");
+    td_delete.textContent = "Delete";
     tr.append(td_title);
     tr.append(td_author);
     tr.append(td_status);
