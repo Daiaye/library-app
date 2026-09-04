@@ -54,13 +54,104 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-.container {
-  padding: 50px
-}
-
-/* Table styles */
 html {
   font-family: sans-serif;
+}
+
+body {
+  background-color: #fafafa;
+  color: #222;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+
+.heading {
+  margin-bottom: 30px;
+}
+
+.heading h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Form styles */
+#book-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid rgb(225 225 225);
+  border-radius: 6px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 140px;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px 10px;
+  border: 1px solid rgb(210 210 210);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+#book-form button {
+  padding: 9px 18px;
+  border: none;
+  border-radius: 4px;
+  background-color: #222;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+#book-form button:hover {
+  background-color: #444;
+}
+
+/* Table container */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.status-button,
+.delete-button {
+  padding: 6px 12px;
+  border: 1px solid rgb(210 210 210);
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.status-button:hover,
+.delete-button:hover {
+  background-color: rgb(235 235 235);
 }
 
 table {
@@ -99,5 +190,3 @@ caption {
 .column-border {
   border: 2px solid black;
 }
-
-

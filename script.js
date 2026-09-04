@@ -10,7 +10,61 @@ let myLibrary = [
         title: "Shorter Summa",
         author: "Saint Thomas Aquinas",
         status: "not read"
-    }
+    },
+    {
+        id: crypto.randomUUID(),
+        title: "Mere Christianity",
+        author: "C.S. Lewis",
+        status: "not read"
+    },
+    {
+        id: crypto.randomUUID(),
+        title: "The Screwtape Letters",
+        author: "C.S. Lewis",
+        status: "not read"
+    },
+    {
+        id: crypto.randomUUID(),
+        title: "The Case for Catholicism",
+        author: "Trent Horn",
+        status: "not read"
+    },
+    {
+        id: crypto.randomUUID(),
+        title: "Your Name",
+        author: "Makoto Shinkai",
+        status: "read"
+    },
+    {
+        id: crypto.randomUUID(),
+        title: "Weathering With You",
+        author: "Makoto Shinkai",
+        status: "read"
+    },
+    {
+        id: crypto.randomUUID(),
+        title: "I Want To Eat Your Pancreas",
+        author: "Yoru Sumino",
+        status: "read"
+    },
+    {
+        id: crypto.randomUUID(),
+        title: "A Silent Voice",
+        author: "Yoshitoki Oima",
+        status: "read"
+    },
+    {
+        id: crypto.randomUUID(),
+        title: "Haikyu!!",
+        author: "Haruichi Furudate",
+        status: "read"
+    },
+        {
+        id: crypto.randomUUID(),
+        title: "Demon Slayer: Kimetsu no Yaiba",
+        author: "Koyoharu Gotouge",
+        status: "read"
+    },
 ];
 
 function Book(id, title, author, status) {
@@ -52,7 +106,7 @@ function renderTable() {
         existingTable.remove();
     }
 
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".main-container");
     
     const tableContainer = document.createElement("div");
     tableContainer.classList.add("table-container");
@@ -147,11 +201,6 @@ form.addEventListener("submit", function(event) {
     const bookTitle = document.getElementById("book").value.trim();
     const bookAuthor = document.getElementById("author").value.trim();
     const bookStatus = document.getElementById("status").value;
-
-    if (!bookTitle || !bookAuthor) {
-        alert("Please enter a book title and/or book author.");
-        return;
-    }
 
     addBookToLibrary(bookTitle, bookAuthor, bookStatus);
     renderTable();
